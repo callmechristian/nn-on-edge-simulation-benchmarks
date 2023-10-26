@@ -12,7 +12,7 @@ class SystemMonitor:
         self.monitoring = False
         self.interval = 1
 
-    def start_monitor(self, interval=1):
+    def start(self, interval=1):
         """
         Start monitoring system resources at regular intervals.
 
@@ -70,7 +70,7 @@ class SystemMonitor:
         self.monitoring_thread.start()
         print(f"Monitoring started with an interval of {interval} seconds.")
 
-    def stop_monitor(self):
+    def stop(self):
         if not self.monitoring:
             print("Monitoring is not running.")
             return
@@ -170,11 +170,11 @@ class SystemMonitor:
 if __name__ == "__main__":
     # For command line interaction
     monitor = SystemMonitor()
-    monitor.start_monitor(interval=1)
+    monitor.start(interval=1)
 
     # Allow monitoring for a specified duration (e.g., 10 seconds)
     time.sleep(3)
 
     # Stop the monitoring
-    monitor.stop_monitor()
+    monitor.stop()
     monitor.compute_and_print_average()
