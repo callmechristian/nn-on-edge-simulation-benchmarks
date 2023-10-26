@@ -85,6 +85,7 @@ class SystemMonitor:
         while self.monitoring:
             self.read_system_resources()
             time.sleep(self.interval)
+            self.totalTime = self.interval
 
     def read_system_resources(self):
         disk_io = psutil.disk_io_counters()
@@ -125,6 +126,9 @@ class SystemMonitor:
             if key == "timestamp":
                 continue
             avg_snapshot[key] = sum(snapshot[key] for snapshot in self.snapshots) / num_snapshots
+
+        # add total time to snapshot
+        avg_snapshot.update({"total_time": self.totalTime})
 
         print("Average Snapshot:")
         print(avg_snapshot)
