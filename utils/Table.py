@@ -11,7 +11,7 @@ class Table:
         """
         try:
             # Read the existing DataFrame from the file
-            existing_df = pd.read_csv(filename)
+            existing_df = pd.read_csv("dataframes/"+filename)
         except FileNotFoundError:
             print(f"Error: The file {filename} does not exist. Use 'create-table.py' to create the initial DataFrame.")
             return
