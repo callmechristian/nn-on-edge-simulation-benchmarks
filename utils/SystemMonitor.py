@@ -108,7 +108,7 @@ class SystemMonitor:
             "read_count": read_count_diff,
             "write_count": write_count_diff,
             "read_bytes": read_bytes_diff,
-            "write_bytes": write_bytes_diff,
+            "write_bytes": write_bytes_diff
         }
         
         self.snapshots.append(snapshot)
@@ -132,6 +132,34 @@ class SystemMonitor:
 
         print("Average Snapshot:")
         print(avg_snapshot)
+
+        # Get CPU information
+        print("Processor Info:")
+        print(f"Number of Cores: {psutil.cpu_count(logical=False)}")
+        print(f"Number of Logical CPUs: {psutil.cpu_count(logical=True)}")
+        print(f"CPU Frequency: {psutil.cpu_freq().current} MHz")
+
+        # Get memory (RAM) information
+        memory_info = psutil.virtual_memory()
+        print("\nMemory Info:")
+        print(f"Total RAM: {memory_info.total / (1024 ** 3):.2f} GB")
+        print(f"Available RAM: {memory_info.available / (1024 ** 3):.2f} GB")
+        print(f"Used RAM: {memory_info.used / (1024 ** 3):.2f} GB")
+
+        # Gt swap (virtual memory) information
+        swap_info = psutil.swap_memory()
+        print("\nSwap (Virtual Memory) Info:")
+        print(f"Total Swap: {swap_info.total / (1024 ** 3):.2f} GB")
+        print(f"Used Swap: {swap_info.used / (1024 ** 3):.2f} GB")
+
+        # Get disk usage information
+        disk_info = psutil.disk_usage('/')
+        print("\nDisk Storage Info:")
+        print(f"Total Disk Space: {disk_info.total / (1024 ** 3):.2f} GB")
+        print(f"Used Disk Space: {disk_info.used / (1024 ** 3):.2f} GB")
+        print(f"Free Disk Space: {disk_info.free / (1024 ** 3):.2f} GB")
+        print(f"Disk Usage Percentage: {disk_info.percent}%")
+
     
     def compute_and_return_average(self):
         '''
@@ -139,25 +167,54 @@ class SystemMonitor:
 
         snapshot = {
             "timestamp": time,
+            "cpu_number_cores": cpu_number_cores,
+            "cpu_number_cores_logical": cpu_number_cores_logical,
+            "cpu_frequency": cpu_frequency,
+            "ram_total": ram_total [GB],
+            "ram_available": ram_available [GB],
+            "ram_used": ram_used [GB],
+            "swap_total": swap_total [GB],
+            "swap_used": swap_used [GB],
             "cpu_percent": cpu_percent,
             "memory_percent": memory_info.percent,
             "read_count": read_count_diff,
             "write_count": write_count_diff,
             "read_bytes": read_bytes_diff,
             "write_bytes": write_bytes_diff,
+            "total_time": total_time   
         }
         '''
+        # Get memory (RAM) information
+        memory_info = psutil.virtual_memory()
+
+        # Gt swap (virtual memory) information
+        swap_info = psutil.swap_memory()
+
+        # Create AVG
+        avg_snapshot = {}
+
+        avg_snapshot.update({"cpu_number_cores": psutil.cpu_count(logical=False)})
+        avg_snapshot.update({"cpu_number_cores_logical": psutil.cpu_count(logical=True)})
+        avg_snapshot.update({"cpu_frequency": psutil.cpu_freq().current})
+        avg_snapshot.update({"ram_total": "{:.2f}".format(memory_info.total / (1024 ** 3))})
+        avg_snapshot.update({"ram_available": "{:.2f}".format(memory_info.available / (1024 ** 3))})
+        avg_snapshot.update({"ram_used": "{:.2f}".format(memory_info.used / (1024 ** 3))})
+        avg_snapshot.update({"swap_total": "{:.2f}".format(swap_info.total / (1024 ** 3))})
+        avg_snapshot.update({"swap_used": "{:.2f}".format(swap_info.used / (1024 ** 3))})
+
         if not self.snapshots:
             print("No snapshots available for computing the average.")
             return
-
-        avg_snapshot = {}
+        
         num_snapshots = len(self.snapshots)
 
         for key in self.snapshots[0]:
             if key == "timestamp":
                 continue
             avg_snapshot[key] = sum(snapshot[key] for snapshot in self.snapshots) / num_snapshots
+
+        # added total monitoring time
+        avg_snapshot.update({"total_time": self.totalTime})
 
         return avg_snapshot
     
