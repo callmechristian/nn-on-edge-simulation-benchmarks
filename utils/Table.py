@@ -21,7 +21,7 @@ class Table:
         updated_df = pd.concat([existing_df, new_data_df], ignore_index=True)
 
         # Save the updated DataFrame back to the file
-        updated_df.to_csv(filename, index=False)
+        updated_df.to_csv("dataframes/"+filename, index=False)
         print(f"{len(data)} row(s) appended to {filename}.")
 
     def create_empty_df(filename, column_names):
@@ -41,7 +41,7 @@ class Table:
         """
 
         df = pd.DataFrame(columns=column_names)
-        df.to_csv(filename, index=False)
+        df.to_csv("dataframes/"+filename, index=False)
 
     
 def main():
@@ -62,13 +62,13 @@ def main():
         column_names = sys.argv[2:]
         filename = sys.argv[1]
 
-        Table.create_empty_df(column_names, "dataframes/"+filename)
+        Table.create_empty_df(column_names, filename)
 
     if(mode == "append"):
         filename = args[1]
         data = [args[2:]]
 
-        Table.append_to_df(data, "dataframes/" + filename)
+        Table.append_to_df(data, filename)
 
 if __name__ == "__main__":
     main()
