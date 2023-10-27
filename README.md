@@ -148,3 +148,47 @@ You can also interact with the `SystemMonitor` class from the command line:
 **Note:** Ensure you have the necessary dependencies, such as the `psutil` library and the required custom classes (`SystemMonitor`, `SS_Model`), in your project.
 
 Feel free to adapt and integrate the `SystemMonitor` class into your project for efficient system resource monitoring.
+
+## Note
+
+### Model Sizes
+Total Size: 7236 MB (7.24 GB)
+
+Xception: 88 MB
+VGG16: 528 MB
+VGG19: 549 MB
+ResNet50: 98 MB
+ResNet50V2: 98 MB
+ResNet101: 171 MB
+ResNet101V2: 171 MB
+ResNet152: 232 MB
+ResNet152V2: 232 MB
+InceptionV3: 92 MB
+InceptionResNetV2: 215 MB
+MobileNet: 16 MB
+MobileNetV2: 14 MB
+DenseNet121: 33 MB
+DenseNet169: 57 MB
+DenseNet201: 80 MB
+NASNetMobile: 23 MB
+NASNetLarge: 343 MB
+EfficientNetB0: 29 MB
+EfficientNetB1: 31 MB
+EfficientNetB2: 36 MB
+EfficientNetB3: 48 MB
+EfficientNetB4: 75 MB
+EfficientNetB5: 118 MB
+EfficientNetB6: 166 MB
+EfficientNetB7: 256 MB
+EfficientNetV2B0: 29 MB
+EfficientNetV2B1: 34 MB
+EfficientNetV2B2: 42 MB
+EfficientNetV2B3: 59 MB
+EfficientNetV2S: 88 MB
+EfficientNetV2M: 220 MB
+EfficientNetV2L: 479 MB
+ConvNeXtTiny: 109.42 MB
+ConvNeXtSmall: 192.29 MB
+ConvNeXtBase: 338.58 MB
+ConvNeXtLarge: 755.07 MB
+ConvNeXtXLarge: 1310 MB
