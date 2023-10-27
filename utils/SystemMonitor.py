@@ -58,6 +58,7 @@ class SystemMonitor:
         self.monitoring_thread = None
         self.monitoring = False
         self.interval = 1
+        self.totalTime = 0
 
     def start(self, interval=1):
         """
