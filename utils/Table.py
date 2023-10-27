@@ -1,5 +1,9 @@
 import pandas as pd
 import sys
+import time
+
+from utils.SystemMonitor import SystemMonitor
+from models.SS_model import SS_Model
 
 class Table:
     def append_to_df(filename, data):
@@ -43,7 +47,31 @@ class Table:
         df = pd.DataFrame(columns=column_names)
         df.to_csv("dataframes/"+filename, index=False)
 
-    
+    def append_data_to_samples(filename: str, model_name: str, monitor: SystemMonitor, model_class: SS_Model):
+        # Create a list to hold the data
+        appendable = []
+
+        # Add timestamp
+        appendable.append(time.strftime("%y:%m:%d:%H:%M:%S", time.gmtime()))
+
+        # Add model name
+        appendable.append(model_name)
+
+        # Compute and add average values from the monitor
+        keys = monitor.compute_and_return_average()
+        for value in keys.values():
+            appendable.append(value)
+
+        # Add correct result from model class
+        appendable.append(str(model_class.correct_result()))
+
+        # Append the data to the DataFrame
+        Table.append_to_df(filename, [appendable])
+
+        # Print for sanity check
+        print("Appended to sample file:")
+        print(appendable)
+
 def main():
     """Creates an empty dataframe or appends rows to an existing Pandas DataFrame saved in the given file.
 

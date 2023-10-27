@@ -3,8 +3,13 @@ from keras.preprocessing import image
 from keras.applications.resnet50 import preprocess_input, decode_predictions
 import numpy as np
 
-class SS_ResNet50:
+# class inheritance
+from models.SS_model import SS_Model
+
+class SS_ResNet50(SS_Model):
     def __init__(self):
+        super().__init__() # very important
+
         self.model = ResNet50(weights='imagenet')
 
         img_path = 'samples/african_elephant.jpg'

@@ -4,16 +4,7 @@ import threading
 import csv
 
 class SystemMonitor:
-    prev_disk_io = psutil.disk_io_counters()
-    snapshots = []
-
-    def __init__(self):
-        self.monitoring_thread = None
-        self.monitoring = False
-        self.interval = 1
-
-    def start(self, interval=1):
-        """
+    """
         Start monitoring system resources at regular intervals.
 
         Args:
@@ -23,7 +14,7 @@ class SystemMonitor:
         Usage:
             1. Import the SystemMonitor class from your script where it's defined.
 
-                from your_script import SystemMonitor
+                from utils.SystemMonitor import SystemMonitor
 
             2. Create an instance of the SystemMonitor class.
 
@@ -60,6 +51,22 @@ class SystemMonitor:
             # Stop monitoring
             monitor.stop_monitor()
         """
+    prev_disk_io = psutil.disk_io_counters()
+    snapshots = []
+
+    def __init__(self):
+        self.monitoring_thread = None
+        self.monitoring = False
+        self.interval = 1
+
+    def start(self, interval=1):
+        """
+        Start monitoring system resources at regular intervals.
+
+        Args:
+            interval (int, optional): The time interval in seconds at which system resource snapshots will be collected.
+            Defaults to 1 second.
+        """
         if self.monitoring:
             print("Monitoring is already running.")
             return
@@ -68,6 +75,7 @@ class SystemMonitor:
         self.monitoring = True
         self.monitoring_thread = threading.Thread(target=self.monitoring_loop)
         self.monitoring_thread.start()
+        self.prev_disk_io = psutil.disk_io_counters()
         print(f"Monitoring started with an interval of {interval} seconds.")
 
     def stop(self):
@@ -77,15 +85,13 @@ class SystemMonitor:
 
         self.monitoring = False
         self.monitoring_thread.join()
-        disk_io = psutil.disk_io_counters()
         print("Monitoring stopped.")
 
     def monitoring_loop(self):
-        prev_disk_io = psutil.disk_io_counters()
         while self.monitoring:
             self.read_system_resources()
             time.sleep(self.interval)
-            self.totalTime = self.interval
+            self.totalTime += self.interval
 
     def read_system_resources(self):
         disk_io = psutil.disk_io_counters()
