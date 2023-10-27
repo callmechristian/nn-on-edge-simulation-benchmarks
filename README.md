@@ -144,7 +144,3 @@ You can also interact with the `SystemMonitor` class from the command line:
     ```
 
    The `[extensive]` flag is optional and determines whether to write extensive snapshots or just the average snapshot to the CSV file.
-
-**Note:** Ensure you have the necessary dependencies, such as the `psutil` library and the required custom classes (`SystemMonitor`, `SS_Model`), in your project.
-
-Feel free to adapt and integrate the `SystemMonitor` class into your project for efficient system resource monitoring.
