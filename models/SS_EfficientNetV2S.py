@@ -12,21 +12,25 @@ class SS_EfficientNetV2S(SS_Model):
 
         self.model = EfficientNetV2S(weights='imagenet')
 
-        img_path = 'samples/african_elephant.jpg'
-        img = image.load_img(img_path, target_size=(224, 224))
-        self.x = image.img_to_array(img)
-        self.x = np.expand_dims(self.x, axis=0)
-        self.x = preprocess_input(self.x)
-    
+        # Select random samples from dataset
+        self.selected_files = self.select_test_data()
+
+        # Create prediction array
+        self.classes_predicted = []
+            
     def predict(self):
-        self.preds = self.model.predict(self.x)
-
-    def correct_result(self):
-        # decode the results into a list of tuples (class, description, probability)
-        # (one such list for each sample in the batch)
-        # print('Predicted:', decode_predictions(preds, top=1)[0])
-
-        expected = 'African_elephant'
-
-        return decode_predictions(self.preds, top=1)[0][0][1] == expected
-        
+        for file in self.selected_files:
+            img = image.load_img(file[0], target_size=(384, 384))
+            x = image.img_to_array(img)
+            x = np.expand_dims(x, axis=0)
+            x = preprocess_input(x)
+            
+            preds = self.model.predict(x)
+            d_preds = decode_predictions(preds, top=1)[0][0]
+            class_pred = d_preds[0]
+            name_pred = d_preds[1]
+            
+            self.classes_predicted.append((class_pred,file[1],name_pred))
+            
+            # # debug
+            # print((class_pred,file[1],name_pred))

@@ -63,7 +63,9 @@ class Table:
             appendable.append(value)
 
         # Add correct result from model class
-        appendable.append(str(model_class.correct_result()))
+        metrics = model_class.get_metrics()
+        for key in metrics:
+            appendable.append(str(metrics[key]))
 
         # Append the data to the DataFrame
         Table.append_to_df(filename, [appendable])
