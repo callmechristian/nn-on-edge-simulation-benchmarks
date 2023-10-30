@@ -32,9 +32,9 @@ class SS_Model(ABC):
         accuracy = accuracy_score(tc, pc)
 
         # Compute precision, recall, and F1-score
-        precision = precision_score(tc, pc, average='weighted')
-        recall = recall_score(tc, pc, average='weighted')
-        f1 = f1_score(tc, pc, average='weighted')
+        precision = precision_score(tc, pc, average='weighted', zero_division = 1)
+        recall = recall_score(tc, pc, average='weighted', zero_division = 1)
+        f1 = f1_score(tc, pc, average='weighted', zero_division = 1)
 
         # Classification report
         class_report = classification_report(tc, pc)
