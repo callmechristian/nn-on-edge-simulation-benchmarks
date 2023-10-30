@@ -1,12 +1,20 @@
 # nn-on-edge-simulation-benchmarks
 
+The test dataset for the pre-trained networks are 100 random classes out of ImageNet-1k.
+
 # Setup
 Run setup.py in a terminal to install all prerequisites. ~1GB
 
 # Usage
 
+Anything not mentioned here should be commented in the source files themselves.
+
 ## Sampling
-**sample.ipynb** is for running each prediction and aggregating the results. Follow the example for ResNet50
+`sample.ipynb` is for running each prediction and aggregating the results. Follow the example for ResNet50
+
+`statistics.ipynb` is for computing the statistics and metrics of the `Samples<#>.csv` files. Although once we have all the samples we should move this to Colab **#TODO**
+
+The dataset is automatically downloaded and unzipped from google drive when you run `sample.ipynb`. **~700mb**
 
 ## Extending
 **SS_model.py** is the base class for all models
@@ -121,39 +129,12 @@ The `SystemMonitor` class provides a utility for monitoring system resources at 
 
    - Use the `write_snapshots_to_csv` method to write collected snapshots to a CSV file. You can specify whether to write extensive snapshots or just the average snapshot.
 
-### Command-Line Usage
-
-You can also interact with the `SystemMonitor` class from the command line:
-
-- To start monitoring from the command line:
-
-    ```shell
-    python3 your_script.py start
-    ```
-
-- To stop monitoring from the command line:
-
-    ```shell
-    python3 your_script.py stop
-    ```
-
-- To write snapshots to a CSV file from the command line:
-
-    ```shell
-    python3 your_script.py write_snapshots filename.csv [extensive]
-    ```
-
-   The `[extensive]` flag is optional and determines whether to write extensive snapshots or just the average snapshot to the CSV file.
-
-**Note:** Ensure you have the necessary dependencies, such as the `psutil` library and the required custom classes (`SystemMonitor`, `SS_Model`), in your project.
-
-Feel free to adapt and integrate the `SystemMonitor` class into your project for efficient system resource monitoring.
-
 ## Note
 
 ### Model Sizes
 Total Size: 7236 MB (7.24 GB)
 
+```
 Xception: 88 MB
 VGG16: 528 MB
 VGG19: 549 MB
@@ -192,3 +173,4 @@ ConvNeXtSmall: 192.29 MB
 ConvNeXtBase: 338.58 MB
 ConvNeXtLarge: 755.07 MB
 ConvNeXtXLarge: 1310 MB
+```
