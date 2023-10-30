@@ -12,7 +12,9 @@ Anything not mentioned here should be commented in the source files themselves.
 ## Sampling
 `sample.ipynb` is for running each prediction and aggregating the results. Follow the example for ResNet50
 
-`statistics.ipynb` is for computing the statistics and metrics of the `Samples<#>.csv` files. Although once we have all the samples we should move this to Colab **#TODO**
+Statistics have been moved to Colab here: [LINK to Colab Notebook](https://colab.research.google.com/drive/1N10nkwOroTAoQyarE0EbAeVgEm9cesZK?usp=sharing)
+
+~~`statistics.ipynb` is for computing the statistics and metrics of the `Samples<#>.csv` files. Although once we have all the samples we should move this to Colab **#TODO**~~
 
 The dataset is automatically downloaded and unzipped from google drive when you run `sample.ipynb`. **~700mb**
 
