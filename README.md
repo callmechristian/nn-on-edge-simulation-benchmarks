@@ -2,6 +2,8 @@
 
 The test dataset for the pre-trained networks are 100 random classes out of ImageNet-1k.
 
+**FOR QUANTITATIVE ASSIGNMENT**: [LINK to Colab Notebook](https://colab.research.google.com/drive/1a6TM5RRyMC_j9k_NlxVENhmbTkZLpLfr#scrollTo=AZikSZ_9iwb6)
+
 # Setup
 Run setup.py in a terminal to install all prerequisites. ~1GB
 
