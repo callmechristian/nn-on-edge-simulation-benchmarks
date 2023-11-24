@@ -2,7 +2,8 @@
 
 The test dataset for the pre-trained networks are 100 random classes out of ImageNet-1k.
 
-**FOR QUANTITATIVE ASSIGNMENT**: [LINK to Colab Notebook](https://colab.research.google.com/drive/1a6TM5RRyMC_j9k_NlxVENhmbTkZLpLfr#scrollTo=AZikSZ_9iwb6)
+**FOR QUANTITATIVE ANALYSIS OF RESNET50**: [LINK to Colab Notebook](https://colab.research.google.com/drive/1a6TM5RRyMC_j9k_NlxVENhmbTkZLpLfr#scrollTo=AZikSZ_9iwb6)
+**FOR STATISTICAL ANALYSIS OF AGGREGATE DATA**: [LINK to Colab Notebook](https://colab.research.google.com/drive/1N10nkwOroTAoQyarE0EbAeVgEm9cesZK?usp=sharing)
 
 # Setup
 Run setup.py in a terminal to install all prerequisites. ~1GB
@@ -13,10 +14,6 @@ Anything not mentioned here should be commented in the source files themselves.
 
 ## Sampling
 `sample.ipynb` is for running each prediction and aggregating the results. Follow the example for ResNet50
-
-Statistics have been moved to Colab here: [LINK to Colab Notebook](https://colab.research.google.com/drive/1N10nkwOroTAoQyarE0EbAeVgEm9cesZK?usp=sharing)
-
-~~`statistics.ipynb` is for computing the statistics and metrics of the `Samples<#>.csv` files. Although once we have all the samples we should move this to Colab **#TODO**~~
 
 The dataset is automatically downloaded and unzipped from google drive when you run `sample.ipynb`. **~700mb**
 
