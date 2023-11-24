@@ -2,13 +2,39 @@
 
 The test dataset for the pre-trained networks are 100 random classes out of ImageNet-1k.
 
-**FOR QUANTITATIVE ANALYSIS OF RESNET50**: [LINK to Colab Notebook](https://colab.research.google.com/drive/1a6TM5RRyMC_j9k_NlxVENhmbTkZLpLfr#scrollTo=AZikSZ_9iwb6)
 
-**FOR STATISTICAL ANALYSIS OF AGGREGATE DATA**: [LINK to Colab Notebook](https://colab.research.google.com/drive/1N10nkwOroTAoQyarE0EbAeVgEm9cesZK?usp=sharing)
+
 
 # Setup
-Run setup.py in a terminal to install all prerequisites. ~1GB
+> [!IMPORTANT]
+> Clone repo and run setup.py in a terminal to install all prerequisites. ~1GB
 
+# Results [^1]
+> [!TIP]
+> The complete data analysis is found [here](https://colab.research.google.com/drive/1N10nkwOroTAoQyarE0EbAeVgEm9cesZK?usp=sharing).
+
+From the following correlations graphs it's obvious that inference time is inversely correlated with the number of physical CPU cores available. This is not surprising, as having more physical CPU cores often leads to better parallelism and multitasking capabilities. In scenarios where multiple tasks or processes can be executed concurrently, a higher number of CPU cores can distribute the workload more efficiently, potentially reducing the overall inference time. This correlation aligns with the expected behavior in systems designed to leverage parallel processing, highlighting the impact of CPU core count on computational performance.
+
+<img src="/plots/plot_correlations_configuration_aggregate.png" width="50%">
+<img src="/plots/plot_correlations_res_usage_aggregate.png" width="50%">
+
+We can see that MobileNet is superior to all other models in terms of efficiency, and has the best scores for 4GB RAM and 1 physical CPU core.
+
+<img src="/plots/plot_power_efficiency_score_best_case.png" width="50%">
+
+On a closer look, MobileNet actually dominates the leaderboard of efficiency with a score of 72. There is a slight efficiency drop between using 2GB RAM vs 4GB RAM, the latter being 4 units less. Justifiably, you can safely use the 2GB version as it is likely to lead to a percentually insignificant decrease in performance.
+
+<img src="/plots/plot_power_efficiency_score_top20.png" width="50%">
+
+Our hypothesis was that a model's performance is not impacted by the resource configurations, however this is only partly true. Doing a P-test on our data showed that the inference time is impacted by the configuration. [^2]
+
+<img src="/plots/plot_ptest_aggregate.png" width="30%">
+
+> [!NOTE]
+> For a restricted analysis solely on ResNet50 for different configurations check [this](https://colab.research.google.com/drive/1a6TM5RRyMC_j9k_NlxVENhmbTkZLpLfr#scrollTo=AZikSZ_9iwb6) out
+
+[^1]: Plots and data have been analysed in [this](https://colab.research.google.com/drive/1N10nkwOroTAoQyarE0EbAeVgEm9cesZK?usp=sharing) colab notebook.
+[^2]: Mainly by the number of physical CPU cores available.
 # Usage
 
 Anything not mentioned here should be commented in the source files themselves.
@@ -131,10 +157,10 @@ The `SystemMonitor` class provides a utility for monitoring system resources at 
 
    - Use the `write_snapshots_to_csv` method to write collected snapshots to a CSV file. You can specify whether to write extensive snapshots or just the average snapshot.
 
-## Note
+## Model Sizes
 
-### Model Sizes
-Total Size: 7236 MB (7.24 GB)
+> [!NOTE]
+> Total Size: 7236 MB (7.24 GB)
 
 ```
 Xception: 88 MB
